@@ -35,8 +35,8 @@ public class MultiHttpSecurityConfig {
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-//                .withUser("羽子少年").password("666").roles("admin") // 不加密时匹配的密码-明文匹配明文
-//                .withUser("keestep").password("000").roles("user"); // 同上
+//                .withUser("羽子少年").password("456").roles("admin") // 不加密时匹配的密码-明文匹配明文
+//                .withUser("keestep").password("123").roles("user"); // 同上
                 .withUser("羽子少年").password("$2a$10$/OGqLaLqOsbqUlAdxi1IH.icLe36qaFXLk1pMXMFZl7yJByZae5j2").roles("admin")
                 .and()
                 .withUser("keestep").password("$2a$10$3hx.QlOLaNdz/DWoKWsIxedKJAx3V0/0i95slfQLhIeRTswEM5sY2").roles("user");
