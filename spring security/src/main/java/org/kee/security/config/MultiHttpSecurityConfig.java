@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.PrintWriter;
@@ -44,7 +43,7 @@ public class MultiHttpSecurityConfig {
 
 
     @Configuration
-    @Order(1) // 优先级；1最大。默认值为100，且不能重复，所以当有多个配置（WebSecurityConfigurerAdapter）时，最多只能有一个不加此注解
+    @Order(1) // 优先级；1最大。默认值为2147483647，且不能重复，所以当有多个配置（WebSecurityConfigurerAdapter）时，最多只能有一个不加此注解
     public static class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {

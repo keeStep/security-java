@@ -22,7 +22,7 @@ public class MethodSecurityService {
     }
 
     @PreAuthorize("hasAnyRole('admin', 'user')")
-    public String All() {
+    public String all() {
         return "HELLO All";
     }
 }

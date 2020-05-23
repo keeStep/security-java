@@ -2,20 +2,13 @@ package org.kee.security.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -64,22 +57,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     out.close();
                 })
                 // 失败响应体【登录失败】
-                .failureHandler(new AuthenticationFailureHandler() {
-                    @Override
-                    public void onAuthenticationFailure(HttpServletRequest req, HttpServletResponse resp, AuthenticationException e) throws IOException, ServletException {
-                        resp.setContentType("application/json;charset=utf-8");
-                        PrintWriter out = resp.getWriter();
-                        Map<String, Object> map = new HashMap<>();
-                        map.put("status", 401);
-                        if (e instanceof LockedException) {
-                            map.put("msg", "用户被锁定，登录失败");
-                        } else {
-                            map.put("msg", "登录失败");
-                        }
-                        out.write(new ObjectMapper().writeValueAsString(map));
-                        out.flush();
-                        out.close();
+                .failureHandler((req, resp, e) -> {
+                    resp.setContentType("application/json;charset=utf-8");
+                    PrintWriter out = resp.getWriter();
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("status", 401);
+                    if (e instanceof LockedException) {
+                        map.put("msg", "用户被锁定，登录失败");
+                    } else {
+                        map.put("msg", "登录失败");
                     }
+                    out.write(new ObjectMapper().writeValueAsString(map));
+                    out.flush();
+                    out.close();
                 })
                 .permitAll()
                 .and()

@@ -51,6 +51,6 @@ public class SecurityController {
 
     @GetMapping("kee3")
     public String kee3(){
-        return methodSecurityService.All();
+        return methodSecurityService.all();
     }
 }
