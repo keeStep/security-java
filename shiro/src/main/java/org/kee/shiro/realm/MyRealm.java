@@ -1,6 +1,5 @@
 package org.kee.shiro.realm;
 
-import jdk.nashorn.internal.parser.Token;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
