@@ -7,8 +7,6 @@ import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.validation.groups.ConvertGroup;
-
 /**
  * @Author： 羽子少年
  * @Date： 2020/4/20 0:20
